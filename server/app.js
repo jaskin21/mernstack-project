@@ -9,6 +9,7 @@ import logger from 'morgan';
 import connectDb from './connect-db.js';
 
 import usersRouter from './routes/userRoutes.js';
+import askQuestionRouter from './routes/askQuestionRoutes.js';
 
 //db connection code
 connectDb(process.env.DB_CONNECTION, process.env.DB_NAME);
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', usersRouter);
+app.use('/ask-question', askQuestionRouter);
 
 app.use(function (req, res, next) {
   res

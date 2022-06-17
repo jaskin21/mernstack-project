@@ -50,7 +50,7 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   //VALIDATE THE DATA BEFORE USER
   const { error } = loginValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error);
 
   //Checking if email exist
   const userEmail = await User.findOne({ email: req.body.email })
