@@ -2,20 +2,25 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
 const UserSchema = mongoose.Schema({
-  name: {
+  username: {
     type: String,
+    lowercase: true,
+    required: [true, 'Please tell us your name.'],
+    // match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
+    // index: true,
+    max: 255,
   },
   email: {
+    unique: true,
     type: String,
+    require: [true, 'Please provide email.'],
+    lowercase: true,
   },
   password: {
+    require: [true, 'Enter your password'],
     type: String,
     min: 8,
     select: false,
-  },
-  img: {
-    data: Buffer,
-    contentType: String,
   },
 });
 

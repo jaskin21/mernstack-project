@@ -1,0 +1,14 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
+    "err": {
+      "name": "pnpm",
+      "message": "No package.json (or package.yaml, or package.json5) was found in \"C:\\Users\\juskin\\Desktop\\finished repo\\mernstack-project\".",
+      "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
+      "stack": "pnpm: No package.json (or package.yaml, or package.json5) was found in \"C:\\Users\\juskin\\Desktop\\finished repo\\mernstack-project\".\n    at readProjectManifest (C:\\Users\\juskin\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:19640:13)\n    at async readProjectManifest (C:\\Users\\juskin\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:43539:60)\n    at async Object.handler (C:\\Users\\juskin\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:121327:67)\n    at async C:\\Users\\juskin\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:174691:21\n    at async run (C:\\Users\\juskin\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:174665:34)\n    at async runPnpm (C:\\Users\\juskin\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:174883:5)\n    at async C:\\Users\\juskin\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:174875:7"
+    }
+  }
+}
