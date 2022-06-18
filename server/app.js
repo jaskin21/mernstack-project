@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import 'dotenv/config';
+import bodyParser from 'body-parser';
 
 import __dirname from './dirname.js';
 import cookieParser from 'cookie-parser';
@@ -16,6 +17,7 @@ connectDb(process.env.DB_CONNECTION, process.env.DB_NAME);
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
