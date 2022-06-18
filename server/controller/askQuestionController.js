@@ -1,5 +1,28 @@
 import AskQuestion from '../model/AskQuestionModel.js';
-import { askQuestionValidation } from '../validation/askQuestionValidation.js';
+import {
+  askQuestionListValidation,
+  askQuestionValidation,
+} from '../validation/askQuestionValidation.js';
+
+// list of question get by spicific user
+export const listOfQuestions = async (req, res) => {
+  //VALIDATE THE DATA BEFORE USER
+  const { error } = askQuestionListValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  try {
+    const items = await AskQuestion.find({
+      respondent: req.body.respondent,
+    }).sort({
+      date: -1,
+    });
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(400).json({
+      message: err?.message ?? 'Something went wrong, please try again',
+    });
+  }
+};
 
 // create question
 export const createQuestion = async (req, res) => {
@@ -10,7 +33,7 @@ export const createQuestion = async (req, res) => {
   const question = new AskQuestion({
     question: req.body.question,
     answer: req.body.answer,
-    respondent: req.body.answer,
+    respondent: req.body.respondent,
   });
   try {
     const saveQuestion = await question.save();
@@ -21,5 +44,3 @@ export const createQuestion = async (req, res) => {
     });
   }
 };
-export const listOfQuestions = async (req, res) => {};
-export const question = async (req, res) => {};

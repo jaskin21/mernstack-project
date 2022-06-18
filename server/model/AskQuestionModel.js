@@ -9,10 +9,15 @@ const AskQuestionSchema = mongoose.Schema({
   answer: {
     type: String,
     max: 700,
+    default: undefined,
   },
   respondent: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'User',
+  },
+  date: {
+    type: Date,
+    default: Date.now(),
   },
 });
 

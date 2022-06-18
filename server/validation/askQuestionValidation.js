@@ -10,3 +10,11 @@ export const askQuestionValidation = (data) => {
   console.log('user question validated');
   return schema.validate(data);
 };
+
+export const askQuestionListValidation = (data) => {
+  const schema = Joi.object({
+    respondent: Joi.string().required(),
+  });
+  console.log('user question list validated');
+  return schema.validate(data);
+};
