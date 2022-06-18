@@ -7,8 +7,9 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import logger from 'morgan';
 import connectDb from './connect-db.js';
-import usersRouter from './routes/userRoutes.js';
+import authRouter from './routes/authRoutes.js';
 import askQuestionRouter from './routes/askQuestionRoutes.js';
+import bearerTokenMiddleware from './middleware/bearerTokenMiddleware.js';
 
 //db connection code
 connectDb(process.env.DB_CONNECTION, process.env.DB_NAME);
@@ -22,8 +23,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bearerTokenMiddleware);
 
-app.use('/user', usersRouter);
+app.use('/auth', authRouter);
 app.use('/ask-question', askQuestionRouter);
 
 app.use(function (req, res) {

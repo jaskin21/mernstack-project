@@ -1,7 +1,5 @@
 import User from '../model/UserModel.js';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import 'dotenv/config';
 import debugLib from 'debug';
 import {
   registerValidation,
@@ -9,15 +7,9 @@ import {
 } from '../validation/userValidation.js';
 import errorResponseFactory from '../utils/errorResponseFactory.js';
 import responseFactory from '../utils/responseFactory.js';
+import signToken from '../utils/signToken.js';
 
 const debug = debugLib('sernver:user-controller');
-
-//generate a token
-const signToken = (id) => {
-  return jwt.sign({ _id: id }, process.env.TOKEN_SECRET, {
-    expiresIn: process.env.TOKEN_EXPIRES_IN,
-  });
-};
 
 // register a user
 export const registerUser = async (req, res) => {
@@ -31,18 +23,15 @@ export const registerUser = async (req, res) => {
   // Chesking if email is unique
   const emailExist = await User.findOne({ email: req.body.email }).exec();
   if (emailExist) {
-    return errorResponseFactory(res, 400, 'Email or password is invalid');
+    return errorResponseFactory(res, 400, 'Email already exists');
   }
   // Create a new user
   const userDetails = new User(req.body);
 
   try {
-    const saveUser = await userDetails.save();
+    await userDetails.save();
 
-    // Create and assign a token
-    const token = signToken(saveUser._id);
-
-    return responseFactory(res, 201, { token });
+    return responseFactory(res, 201, { message: 'Successfully registered' });
   } catch (err) {
     return errorResponseFactory(
       res,
@@ -63,7 +52,7 @@ export const loginUser = async (req, res) => {
   }
   //Checking if email exist
   const searchUser = await User.findOne({ email: req.body.email })
-    .select({ password: 1 })
+    .select(['email', 'password', 'username'])
     .exec();
 
   debug('User email', searchUser);
@@ -84,7 +73,12 @@ export const loginUser = async (req, res) => {
 
   try {
     // Create and assign a token
-    const token = signToken(searchUser._id);
+    const { _id, username, email } = searchUser;
+    const token = signToken(
+      _id,
+      username,
+      email
+    );
 
     return responseFactory(res, 200, { token });
   } catch (err) {
