@@ -1,12 +1,16 @@
-import User from '../model/UserModel.js';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import 'dotenv/config';
-
+import User from "../model/UserModel.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import "dotenv/config";
+import debugLib from "debug";
 import {
   registerValidation,
   loginValidation,
-} from '../validation/userValidation.js';
+} from "../validation/userValidation.js";
+import errorResponseFactory from "../utils/errorResponseFactory.js";
+import responseFactory from "../utils/responseFactory.js";
+
+const debug = debugLib("sernver:user-controller");
 
 //generate a token
 const signToken = (id) => {
@@ -19,12 +23,16 @@ const signToken = (id) => {
 export const registerUser = async (req, res) => {
   // Validate the data before user
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
+  if (error) {
+    return errorResponseFactory(res, 400, error.details[0].message, {
+      details: error.details,
+    });
+  }
   // Chesking if email is unique
   const emailExist = await User.findOne({ email: req.body.email }).exec();
-  if (emailExist) return res.status(400).send('Email already Exist!');
-
+  if (emailExist) {
+    return errorResponseFactory(res, 400, "Email or password is invalid");
+  }
   // Create a new user
   const userDetails = new User(req.body);
 
@@ -34,15 +42,13 @@ export const registerUser = async (req, res) => {
     // Create and assign a token
     const token = signToken(saveUser._id);
 
-    res.status(200).send({
-      status: 'success',
-      token,
-      data: { user: saveUser },
-    });
+    return responseFactory(response, 201, { token });
   } catch (err) {
-    res.status(400).send({
-      message: err?.message ?? 'Something went wrong, please try again',
-    });
+    return errorResponseFactory(
+      response,
+      400,
+      err?.message ?? "Something went wrong, please try again"
+    );
   }
 };
 
@@ -50,33 +56,42 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   //VALIDATE THE DATA BEFORE USER
   const { error } = loginValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
+  if (error) {
+    return errorResponseFactory(res, 400, error.details[0].message, {
+      details: error.details,
+    });
+  }
   //Checking if email exist
-  const userEmail = await User.findOne({ email: req.body.email })
+  const searchUser = await User.findOne({ email: req.body.email })
     .select({ password: 1 })
     .exec();
-  console.log(userEmail);
-  if (!userEmail) return res.status(400).send('Email or password is wrong');
+
+  debug("User email", searchUser);
+
+  if (!searchUser) {
+    return errorResponseFactory(response, 400, "Email or password is wrong");
+  }
 
   //Check if password is correct
   const validPassword = bcrypt.compareSync(
     req.body.password,
-    userEmail.password
+    searchUser.password
   );
 
-  if (!validPassword) return res.status(400).send('Email or password is wrong');
+  if (!validPassword) {
+    return errorResponseFactory(response, 400, "Email or password is wrong");
+  }
 
   try {
     // Create and assign a token
-    const token = signToken();
-    res.json({
-      status: 'success!',
-      token,
-    });
+    const token = signToken(searchUser._id);
+
+    return responseFactory(response, 200, { token });
   } catch (err) {
-    res.status(400).send({
-      message: err?.message ?? 'Something went wrong, please try again',
-    });
+    return errorResponseFactory(
+      response,
+      400,
+      err?.message ?? "Something went wrong, please try again"
+    );
   }
 };
