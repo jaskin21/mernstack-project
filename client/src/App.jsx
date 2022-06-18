@@ -9,7 +9,8 @@ import LandingPage from './pages/LandingPage';
 import NotFound from './pages/NotFound';
 import PrivatePolicy from './pages/PrivatePolicy';
 import ProfilePage from './pages/ProfilePage';
-import TermsOfService from './pages/TermsOfService';
+import AboutPage from './pages/AboutPage';
+import TermsOfService from './pages/TermsOfService'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<LandingPage />} />
           <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/about' element={<AboutPage />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/term-of-service' element={<TermsOfService />} />
           <Route path='/private-policy' element={<PrivatePolicy />} />
