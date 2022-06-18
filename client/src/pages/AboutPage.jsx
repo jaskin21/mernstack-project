@@ -5,7 +5,7 @@ import Picture from '../images/about-image.jpg'
 
 const AboutPage = () => {
   return (
-<section className="text-gray-400  body-font">
+<section className="text-gray-400 body-font">
   <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
     <h2 className='mb-8 text-2xl font-semibold tracking-tighter text-center text-gray-200 lg:text-7xl md:text-6xl'>
       About Us
@@ -16,7 +16,7 @@ const AboutPage = () => {
 
     <div className="flex justify-center">
     {/* <img className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src={Picture} /> */}
-    <img alt="gallery" className="w-3/6 h-2/6 mb-5 object-cover object-center block opacity-1 inset-0" src={Picture} />
+    <img alt="gallery" className="w-5/6 h-2/6 mb-5 object-cover object-center block opacity-1 inset-0" src={Picture} />
     </div>
     
     <div className="text-center lg:w-2/3 w-full">

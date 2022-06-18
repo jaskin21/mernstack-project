@@ -1,8 +1,11 @@
 import React from 'react'
+import ProfileCardComponent from '../components/ProfileCardComponent'
 
 const ProfilePage = () => {
   return (
-    <div>ProfilePage</div>
+   <section>
+    <ProfileCardComponent/ >
+   </section>
   )
 }
 
