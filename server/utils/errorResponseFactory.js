@@ -1,4 +1,4 @@
-import responseFactory from "./responseFactory.js";
+import responseFactory from './responseFactory.js';
 
 /**
  * @typedef {import('express').Response} Response

@@ -10,6 +10,7 @@
 - [Environment](#environment)
     - [Server](#server-2)
     - [Client](#client-2)
+- [Linter](#linter)
 
 ---
 
@@ -17,6 +18,7 @@
 
 - [Node JS](https://nodejs.dev)
 - [pnpm](https://pnpm.io)
+- [Mongo DB](https://www.mongodb.com) (Optional)
 
 ---
 
@@ -27,7 +29,7 @@
 For Client (or Frontend), just run
 
 ```sh
-cd client && pnpm i
+cd client && pnpm install
 ```
 
 ### Server
@@ -35,7 +37,7 @@ cd client && pnpm i
 For Server (or Backend), just run
 
 ```sh
-cd server && pnpm i
+cd server && pnpm install
 ```
 
 ---
@@ -87,6 +89,28 @@ For the Frontend:
 | `VITE_BACKEND_URL` | The Backend URL | `string` | NO       | `http://localhost:5000` |
 
 See [documentation](https://vitejs.dev/guide/env-and-mode.html#env-files) about Environment variables for Vite
+
+---
+
+# Linter
+
+This is make your code consistent by using [ESLint](https://eslint.org).
+
+Before you commit your changes, just make sure to run the linter first
+
+Just go to the project directory `client` or `server`, then run:
+
+```sh
+pnpm run lint
+```
+
+If you wanted to fix automatically, just run:
+
+```sh
+pnpm run lint:fix
+```
+
+⚠️ However, **NOT** all codes are fixable, but the linter will give you hint to fix it
 
 ---
 

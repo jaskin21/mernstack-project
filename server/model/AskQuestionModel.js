@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import UserModel from './UserModel.js';
 
 const AskQuestionSchema = mongoose.Schema({
   question: {
@@ -12,12 +13,12 @@ const AskQuestionSchema = mongoose.Schema({
     default: undefined,
   },
   respondent: {
-    type: String,
-    ref: 'User',
+    type: mongoose.Types.ObjectId,
+    ref: UserModel,
   },
   date: {
     type: Date,
-    default: Date.now(),
+    default: () => Date.now(),
   },
 });
 
