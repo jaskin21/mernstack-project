@@ -10,7 +10,7 @@ const TermsOfService = () => {
         <h1 className="font-bold pb-5 text-lg">1. Important information</h1>
         <p className="font-bold">1a. What are these Terms of Service?</p>
         <p>
-          These terms ("TOS") are part of the legal papers that
+          These terms (&quot;TOS&quot;) are part of the legal papers that
           regulate your access to and use of SLVL, whether you use the website
           or the mobile apps (the “Services”).
         </p>
