@@ -29,7 +29,10 @@ const Footer = () => {
               to={'/about'}
               className='text-md text-gray-200 hover:text-white transition-colors duration-300 hover:text-deep-purple-accent-400 font-semibold tracking-tight'
             >
-              © 2022 Jarthson Inc.
+              &copy;2022 Jarthson Inc.{' '}
+              <span className='text-gray-500 text-ls'>
+                All rights reserved.
+              </span>
             </Link>
           </ul>
         </div>
