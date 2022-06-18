@@ -8,6 +8,7 @@ import SignupForm from './components/SignupForm';
 import LandingPage from './pages/LandingPage';
 import NotFound from './pages/NotFound';
 import ProfilePage from './pages/ProfilePage';
+import AboutPage from './pages/AboutPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<LandingPage />} />
           <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/about' element={<AboutPage />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/register' element={<SignupForm />} />
           <Route path='*' element={<NotFound />} />
