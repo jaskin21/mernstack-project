@@ -5,7 +5,7 @@ export const askQuestionValidation = (data) => {
   const schema = Joi.object({
     question: Joi.string().required().max(500),
     answer: Joi.string().max(700),
-    respondent: Joi.string().required('joi-objectid'),
+    respondent: Joi.string(),
   });
   console.log('user question validated');
   return schema.validate(data);

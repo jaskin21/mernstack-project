@@ -5,7 +5,7 @@ import { askQuestionValidation } from '../validation/askQuestionValidation.js';
 export const createQuestion = async (req, res) => {
   //VALIDATE THE DATA BEFORE USER
   const { error } = askQuestionValidation(req.body);
-  if (error) return res.status(400).send(error);
+  if (error) return res.status(400).send(error.details[0].message);
 
   const question = new AskQuestion({
     question: req.body.question,
