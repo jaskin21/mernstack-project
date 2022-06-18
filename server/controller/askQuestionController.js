@@ -17,7 +17,7 @@ export const listOfQuestions = async (req, res) => {
       date: -1,
     });
     res.status(200).json(items);
-  } catch (error) {
+  } catch (err) {
     res.status(400).json({
       message: err?.message ?? 'Something went wrong, please try again',
     });
