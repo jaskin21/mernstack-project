@@ -1,7 +1,7 @@
 node_modules/
 .vscode/
 .idea/
-*.logs
+*.log
 .env
 .env.*
 !.env.example

@@ -18,7 +18,7 @@
 
 - [Node JS](https://nodejs.dev)
 - [pnpm](https://pnpm.io)
-- [Mongo DB](https://www.mongodb.com) (Optional)
+- [Mongo DB](https://www.mongodb.com) _(Optional)_
 
 ---
 
@@ -29,7 +29,7 @@
 For Client (or Frontend), just run
 
 ```sh
-cd client && pnpm install
+pnpm install --dir client
 ```
 
 ### Server
@@ -37,7 +37,7 @@ cd client && pnpm install
 For Server (or Backend), just run
 
 ```sh
-cd server && pnpm install
+pnpm install --dir server
 ```
 
 ---
@@ -51,7 +51,7 @@ Once the dependencies are installed:
 For Frontend, just run:
 
 ```sh
-cd client && pnpm run start
+pnpm run --dir client start
 ```
 
 ### Server
@@ -59,7 +59,7 @@ cd client && pnpm run start
 For Backend, just run:
 
 ```sh
-cd server && pnpm run dev
+pnpm run --dir server dev
 ```
 
 ---
@@ -98,17 +98,19 @@ This is make your code consistent by using [ESLint](https://eslint.org).
 
 Before you commit your changes, just make sure to run the linter first
 
-Just go to the project directory `client` or `server`, then run:
+Just run run:
 
 ```sh
-pnpm run lint
+pnpm run --dir (client|server) lint
 ```
 
 If you wanted to fix automatically, just run:
 
 ```sh
-pnpm run lint:fix
+pnpm run --dir (client|server) lint:fix
 ```
+
+Make sure to change the value of `--dir` flag
 
 ⚠️ However, **NOT** all codes are fixable, but the linter will give you hint to fix it
 
