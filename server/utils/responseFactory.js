@@ -19,22 +19,22 @@ export const responseStatus = {
  */
 const statusMessageResolver = (statusCode) => {
   switch (statusCode) {
-    case responseStatus.OK:
-      return "Success";
-    case responseStatus.CREATED:
-      return "New resource was created";
-    case responseStatus.BAD_REQUEST:
-      return "Cannot process the request";
-    case responseStatus.UNAUTHORIZED:
-      return "You must authenticate";
-    case responseStatus.FORBIDDEN:
-      return "Does not have access rights";
-    case responseStatus.NOT_FOUND:
-      return "Cannot find the requested resource";
-    case responseStatus.INTERNAL_SERVER_ERROR:
-      return "Something went wrong, please try again";
-    default:
-      return statusCode;
+  case responseStatus.OK:
+    return 'Success';
+  case responseStatus.CREATED:
+    return 'New resource was created';
+  case responseStatus.BAD_REQUEST:
+    return 'Cannot process the request';
+  case responseStatus.UNAUTHORIZED:
+    return 'You must authenticate';
+  case responseStatus.FORBIDDEN:
+    return 'Does not have access rights';
+  case responseStatus.NOT_FOUND:
+    return 'Cannot find the requested resource';
+  case responseStatus.INTERNAL_SERVER_ERROR:
+    return 'Something went wrong, please try again';
+  default:
+    return statusCode;
   }
 };
 

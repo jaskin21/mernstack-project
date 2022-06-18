@@ -2,13 +2,11 @@ import express from 'express';
 import path from 'path';
 import 'dotenv/config';
 import bodyParser from 'body-parser';
-
 import __dirname from './dirname.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import logger from 'morgan';
 import connectDb from './connect-db.js';
-
 import usersRouter from './routes/userRoutes.js';
 import askQuestionRouter from './routes/askQuestionRoutes.js';
 
@@ -28,13 +26,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/user', usersRouter);
 app.use('/ask-question', askQuestionRouter);
 
-app.use(function (req, res, next) {
+app.use(function (req, res) {
   res
     .status(404)
-    .json({ message: "We couldn't find what you were looking for 😞" });
+    .json({ message: 'We couldn\'t find what you were looking for 😞' });
 });
 
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   console.error(err.stack);
   res.status(500).json(err);
 });

@@ -1,16 +1,16 @@
-import User from "../model/UserModel.js";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import "dotenv/config";
-import debugLib from "debug";
+import User from '../model/UserModel.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import 'dotenv/config';
+import debugLib from 'debug';
 import {
   registerValidation,
   loginValidation,
-} from "../validation/userValidation.js";
-import errorResponseFactory from "../utils/errorResponseFactory.js";
-import responseFactory from "../utils/responseFactory.js";
+} from '../validation/userValidation.js';
+import errorResponseFactory from '../utils/errorResponseFactory.js';
+import responseFactory from '../utils/responseFactory.js';
 
-const debug = debugLib("sernver:user-controller");
+const debug = debugLib('sernver:user-controller');
 
 //generate a token
 const signToken = (id) => {
@@ -31,7 +31,7 @@ export const registerUser = async (req, res) => {
   // Chesking if email is unique
   const emailExist = await User.findOne({ email: req.body.email }).exec();
   if (emailExist) {
-    return errorResponseFactory(res, 400, "Email or password is invalid");
+    return errorResponseFactory(res, 400, 'Email or password is invalid');
   }
   // Create a new user
   const userDetails = new User(req.body);
@@ -42,12 +42,12 @@ export const registerUser = async (req, res) => {
     // Create and assign a token
     const token = signToken(saveUser._id);
 
-    return responseFactory(response, 201, { token });
+    return responseFactory(res, 201, { token });
   } catch (err) {
     return errorResponseFactory(
-      response,
+      res,
       400,
-      err?.message ?? "Something went wrong, please try again"
+      err?.message ?? 'Something went wrong, please try again'
     );
   }
 };
@@ -66,10 +66,10 @@ export const loginUser = async (req, res) => {
     .select({ password: 1 })
     .exec();
 
-  debug("User email", searchUser);
+  debug('User email', searchUser);
 
   if (!searchUser) {
-    return errorResponseFactory(response, 400, "Email or password is wrong");
+    return errorResponseFactory(res, 400, 'Email or password is wrong');
   }
 
   //Check if password is correct
@@ -79,19 +79,19 @@ export const loginUser = async (req, res) => {
   );
 
   if (!validPassword) {
-    return errorResponseFactory(response, 400, "Email or password is wrong");
+    return errorResponseFactory(res, 400, 'Email or password is wrong');
   }
 
   try {
     // Create and assign a token
     const token = signToken(searchUser._id);
 
-    return responseFactory(response, 200, { token });
+    return responseFactory(res, 200, { token });
   } catch (err) {
     return errorResponseFactory(
-      response,
+      res,
       400,
-      err?.message ?? "Something went wrong, please try again"
+      err?.message ?? 'Something went wrong, please try again'
     );
   }
 };

@@ -1,10 +1,8 @@
 import express from 'express';
-
 import {
   createQuestion,
   listOfQuestions,
 } from '../controller/askQuestionController.js';
-
 import verify from '../middleware/authMiddleware.js';
 
 const router = express.Router();

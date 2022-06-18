@@ -1,8 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import debugLib from 'debug';
+
+const debug = debugLib('sernver:database');
 
 export default async (connection, dbName) => {
   try {
-    console.log("Database Connected");
+    debug('Database Connected');
     await mongoose.connect(connection, {
       dbName,
       useNewUrlParser: true,
@@ -10,6 +13,6 @@ export default async (connection, dbName) => {
       serverSelectionTimeoutMS: 5000,
     });
   } catch (error) {
-    console.log(error);
+    debug(error);
   }
 };
