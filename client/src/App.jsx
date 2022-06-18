@@ -7,8 +7,10 @@ import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import LandingPage from './pages/LandingPage';
 import NotFound from './pages/NotFound';
+import PrivatePolicy from './pages/PrivatePolicy';
 import ProfilePage from './pages/ProfilePage';
 import AboutPage from './pages/AboutPage';
+import TermsOfService from './pages/TermsOfService'
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/login' element={<LoginForm />} />
+          <Route path='/term-of-service' element={<TermsOfService />} />
+          <Route path='/private-policy' element={<PrivatePolicy />} />
           <Route path='/register' element={<SignupForm />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
