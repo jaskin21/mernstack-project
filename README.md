@@ -10,8 +10,7 @@
 - [Environment](#environment)
     - [Server](#server-2)
     - [Client](#client-2)
-- [Lint](#lint)
-    - [Client](#client-3)
+- [Linter](#linter)
 
 ---
 
@@ -19,6 +18,7 @@
 
 - [Node JS](https://nodejs.dev)
 - [pnpm](https://pnpm.io)
+- [Mongo DB](https://www.mongodb.com) (Optional)
 
 ---
 
@@ -29,7 +29,7 @@
 For Client (or Frontend), just run
 
 ```sh
-cd client && pnpm i
+cd client && pnpm install
 ```
 
 ### Server
@@ -37,7 +37,7 @@ cd client && pnpm i
 For Server (or Backend), just run
 
 ```sh
-cd server && pnpm i
+cd server && pnpm install
 ```
 
 ---
@@ -92,27 +92,25 @@ See [documentation](https://vitejs.dev/guide/env-and-mode.html#env-files) about 
 
 ---
 
-# Lint
+# Linter
 
 This is make your code consistent by using [ESLint](https://eslint.org).
 
 Before you commit your changes, just make sure to run the linter first
 
-### Client
-
-For the Frontend, just run:
+Just go to the project directory `client` or `server`, then run:
 
 ```sh
-cd client && pnpm run lint
+pnpm run lint
 ```
 
 If you wanted to fix automatically, just run:
 
 ```sh
-cd client && pnpm run lint:fix
+pnpm run lint:fix
 ```
 
-However, **NOT** all codes are fixable
+⚠️ However, **NOT** all codes are fixable, but the linter will give you hint to fix it
 
 ---
 
