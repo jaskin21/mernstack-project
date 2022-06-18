@@ -10,6 +10,8 @@
 - [Environment](#environment)
     - [Server](#server-2)
     - [Client](#client-2)
+- [Lint](#lint)
+    - [Client](#client-3)
 
 ---
 
@@ -87,6 +89,30 @@ For the Frontend:
 | `VITE_BACKEND_URL` | The Backend URL | `string` | NO       | `http://localhost:5000` |
 
 See [documentation](https://vitejs.dev/guide/env-and-mode.html#env-files) about Environment variables for Vite
+
+---
+
+# Lint
+
+This is make your code consistent by using [ESLint](https://eslint.org).
+
+Before you commit your changes, just make sure to run the linter first
+
+### Client
+
+For the Frontend, just run:
+
+```sh
+cd client && pnpm run lint
+```
+
+If you wanted to fix automatically, just run:
+
+```sh
+cd client && pnpm run lint:fix
+```
+
+However, **NOT** all codes are fixable
 
 ---
 
