@@ -1,11 +1,17 @@
 import express from 'express';
 
+import {
+  createQuestion,
+  listOfQuestions,
+  question,
+} from '../controller/askQuestionController.js';
+
 import verify from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// router.post('/create', verify, registerUser);
-// router.get('/list', verify, registerUser);
-// router.get('/list/:id', verify, registerUser);
+router.get('/', verify, listOfQuestions);
+router.get('/:id', verify, question);
+router.post('/create', verify, createQuestion);
 
 export default router;

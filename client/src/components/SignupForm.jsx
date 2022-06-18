@@ -6,9 +6,8 @@ const SignupForm = () => {
   const form = document.querySelector('form');
 
   // a local state to store the currently selected file.
-  const [selectedFile, setSelectedFile] = React.useState(null);
   const [formValue, setformValue] = React.useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
   });
@@ -16,10 +15,9 @@ const SignupForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append('name', formValue.name);
+    formData.append('username', formValue.username);
     formData.append('email', formValue.email);
     formData.append('password', formValue.password);
-    formData.append('image', selectedFile);
     try {
       console.log('uploading file');
       const response = await axios({
@@ -70,17 +68,6 @@ const SignupForm = () => {
             name='password'
             class='px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm text-black'
             placeholder='Password'
-          />
-          <input
-            type='password'
-            name='repeat-password'
-            class='px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm text-black'
-            placeholder='Repeat Password'
-          />
-          <input
-            type='file'
-            onChange={handleFileSelect}
-            class='px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm text-black'
           />
           <button
             type='submit'
