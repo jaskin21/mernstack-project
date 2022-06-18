@@ -3,7 +3,7 @@ import React from 'react'
 const ProfileCardComponent = () => {
   return (
     <section class="text-gray-400 body-font">
-      <div class="container px-5 py-24 mx-auto">
+      <div class="container py-20 mx-auto">
         {/* border */}
         <div class="h-full flex items-center border-gray-800 border p-4 rounded-lg"> 
           <div class="flex flex-wrap -m-4">
