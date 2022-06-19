@@ -4,7 +4,6 @@ const ProfileCardComponent = () => {
   return (
     <section className="text-gray-400 body-font">
       <div className="container py-20 mx-auto">
-        {/* border */}
         <div className="h-full flex items-center border-gray-800 border p-4 rounded-lg"> 
           <div className="flex flex-wrap -m-4">
             <div className="p-4 lg:w-5/6">
@@ -19,9 +18,9 @@ const ProfileCardComponent = () => {
             </div>
           </div>
         </div>
-        {/* /border */}
       </div>
     </section>
+
   );
 };
 
