@@ -1,18 +1,43 @@
 import jwt from 'jsonwebtoken';
-import 'dotenv/config';
+import User from '../model/UserModel.js';
+import errorResponseFactory from '../utils/errorResponseFactory.js';
+import { responseStatus } from '../utils/responseFactory.js';
 
-export default (req, res, next) => {
+export default async (req, res, next) => {
   const token =
-    req.body.token || req.query.token || req.headers['x-access-token'];
+    req.token || // Check BearerTokenMiddleware what is this
+    req.body.token ||
+    req.query.token ||
+    req.headers['x-access-token'];
 
   if (!token) {
-    return res.status(403).send('A token is required for authentication');
+    return errorResponseFactory(
+      res,
+      responseStatus.FORBIDDEN,
+      'A token is required for authentication'
+    );
   }
+
   try {
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+
+    if (decoded.sub !== undefined) {
+      // Will check if the decoded sub or User Id exists
+      // Else it will throw an error
+      await User.findById(decoded.sub).exec();
+    }
+
     req.user = decoded;
   } catch (err) {
-    return res.status(401).send('Invalid Token');
+    return errorResponseFactory(
+      res,
+      responseStatus.UNAUTHORIZED,
+      'Invalid Token',
+      {
+        details: err?.message
+      }
+    );
   }
-  return next();
+
+  next();
 };
