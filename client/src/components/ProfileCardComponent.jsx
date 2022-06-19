@@ -22,7 +22,7 @@ const ProfileCardComponent = () => {
         {/* /border */}
       </div>
     </section>
-  )
+  );
 };
 
 export default ProfileCardComponent;
