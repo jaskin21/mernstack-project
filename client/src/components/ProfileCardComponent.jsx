@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const ProfileCardComponent = () => {
   return (
@@ -25,4 +25,4 @@ const ProfileCardComponent = () => {
   )
 }
 
-export default ProfileCardComponent
+export default ProfileCardComponent;
