@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProfileCardLandingPage = () => {
   return (
-    <Link to={"/user"}>
+    <Link to={'/user'}>
       <div className="ktq4">
         <div className="ktq5 h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
           <img

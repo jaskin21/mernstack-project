@@ -1,5 +1,5 @@
-import React from "react";
-import ProfileCardQuestion from "./cards/ProfileCardQuestion";
+import React from 'react';
+import ProfileCardQuestion from './cards/ProfileCardQuestion';
 
 const AnswerCardComponent = () => {
   return (
