@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AboutPage = () => {
   return (
+
     <section className="text-gray-400  body-font">
       <div className="container mx-auto flex px-5 py-9 items-center justify-center flex-col">
         <h2 className="mb-10 text-7xl font-semibold tracking-tighter text-center text-gray-200 lg:text-7xl md:text-6xl">
@@ -31,6 +32,7 @@ const AboutPage = () => {
                 <span className="justify-center">Join now</span>
               </div>
             </Link>
+
           </div>
         </div>
       </div>
