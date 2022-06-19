@@ -17,6 +17,7 @@ module.exports = {
     semi: ['error', 'always'],
     'jsx-quotes': ['error', 'prefer-double'],
     quotes: ['error', 'single'],
+    'react/prop-types': ['off'],
   },
   settings: {
     react: {

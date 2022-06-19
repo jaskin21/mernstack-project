@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from '../components/Banner';
 import ProfileCardLandingPage from '../components/cards/ProfileCardLandingPage';
+
 import Newsletter from '../components/Newsletter';
 
 const LandingPage = () => {
