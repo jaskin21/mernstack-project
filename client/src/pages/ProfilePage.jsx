@@ -6,7 +6,7 @@ const ProfilePage = () => {
    <section>
     <ProfileCardComponent/ >
    </section>
-  )
-}
+  );
+};
 
 export default ProfilePage;
