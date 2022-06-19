@@ -1,6 +1,6 @@
 import React from 'react';
-import Banner from './components/Banner';
-import Newsletter from './components/Newsletter';
+import Banner from '../components/Banner';
+import Newsletter from '../components/Newsletter';
 
 const LandingPage = () => {
   return (
