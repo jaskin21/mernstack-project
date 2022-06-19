@@ -1,8 +1,8 @@
 
 import React from 'react';
-import ProfileCardComponent from '../components/ProfileCardComponent'
-import QuestionCardComponent from '../components/QuestionCardComponent'
-import AnswerCardComponent from '../components/AnswerCardComponent'
+import ProfileCardComponent from '../components/ProfileCardComponent';
+import QuestionCardComponent from '../components/QuestionCardComponent';
+import AnswerCardComponent from '../components/AnswerCardComponent';
 
 const ProfilePage = () => {
   return (
@@ -17,8 +17,6 @@ const ProfilePage = () => {
         </div>
       </section>
     </main>
-  )
-}
-
-
+  );
+};
 export default ProfilePage;
