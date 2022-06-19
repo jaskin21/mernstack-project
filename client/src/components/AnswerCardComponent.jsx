@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const AnswerCardComponent = () => {
   return (
@@ -9,11 +9,11 @@ const AnswerCardComponent = () => {
         <div className="h-full flex items-center border-gray-800 border p-4 rounded-lg"> 
           <div className="flex w-full justify-center items-end">
             <div className="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
-              <label for="hero-field" className="leading-7 text-sm text-gray-400">Answer</label>
-              <h3 class='pt-3 font-semibold text-lg text-white'>
+              <label htmlFor="hero-field" className="leading-7 text-sm text-gray-400">Answer</label>
+              <h3 className='pt-3 font-semibold text-lg text-white'>
                 (Question)Lorem ipsum dolor sit amet
               </h3>
-              <p class='pt-2 value-text text-md text-gray-200 fkrr1'>
+              <p className="pt-2 value-text text-md text-gray-200 fkrr1">
                 (Answer)Fusce pharetra ligula mauris, quis faucibus lectus elementum vel.
                 Nullam vehicula, libero at euismod tristique, neque ligula faucibus
                 urna, quis ultricies massa enim in nunc. Vivamus ultricies, quam ut
@@ -28,6 +28,6 @@ const AnswerCardComponent = () => {
       </div>
     </section>
   )
-}
+};
 
-export default AnswerCardComponent
+export default AnswerCardComponent;
