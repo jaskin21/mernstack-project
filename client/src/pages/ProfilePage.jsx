@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React from 'react';
 import ProfileCardComponent from '../components/ProfileCardComponent'
 import QuestionCardComponent from '../components/QuestionCardComponent'
 import AnswerCardComponent from '../components/AnswerCardComponent'
