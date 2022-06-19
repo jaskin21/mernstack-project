@@ -9,7 +9,7 @@ const ProfileCardLandingPage = () => {
           <img
             alt="team"
             className="flex-shrink-0 rounded-lg w-28 h-28 object-cover object-center sm:mb-0 mb-4"
-            src="https://dummyimage.com/200x200"
+            src="https://github.com/identicons/jayaregalinada.png"
           />
           <div className="flex-grow sm:pl-8">
             <h2 className="title-font font-medium text-lg text-white">

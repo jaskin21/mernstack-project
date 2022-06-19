@@ -64,8 +64,8 @@ const Header = () => {
           >
             <img
               alt="team"
-              className="flex-shrink-0 rounded-lg w-10 h-10 object-cover object-center sm:mb-0 "
-              src="https://dummyimage.com/200x200"
+              className="flex-shrink-0 rounded-lg w-7 h-7 object-cover object-center sm:mb-0 "
+              src="https://github.com/identicons/jayaregalinada.png"
             />
             <div className="flex-grow sm:pl-3">
               <h2 className="title-font font-medium text-lg text-white">
