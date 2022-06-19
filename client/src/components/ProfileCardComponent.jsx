@@ -23,6 +23,6 @@ const ProfileCardComponent = () => {
       </div>
     </section>
   )
-}
+};
 
 export default ProfileCardComponent;
