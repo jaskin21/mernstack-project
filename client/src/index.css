@@ -106,3 +106,7 @@ a {
 #corousel-1 {
   min-height: 19rem;
 }
+
+.notFound {
+  background: #1d1d1d;
+}
