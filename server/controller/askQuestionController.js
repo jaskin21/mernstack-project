@@ -8,9 +8,11 @@ export const listOfQuestions = async (req, res) => {
   try {
     const items = await AskQuestion.find({
       respondent: req.user.id,
-    }).sort({
-      date: -1,
-    });
+    })
+      .sort({
+        date: -1,
+      })
+      .limit(15);
 
     return responseFactory(res, 200, { items });
   } catch (err) {
