@@ -1,7 +1,7 @@
-import AskQuestion from "../model/AskQuestionModel.js";
-import errorResponseFactory from "../utils/errorResponseFactory.js";
-import responseFactory, { responseStatus } from "../utils/responseFactory.js";
-import { askQuestionValidation } from "../validation/askQuestionValidation.js";
+import AskQuestion from '../model/AskQuestionModel.js';
+import errorResponseFactory from '../utils/errorResponseFactory.js';
+import responseFactory, { responseStatus } from '../utils/responseFactory.js';
+import { askQuestionValidation } from '../validation/askQuestionValidation.js';
 
 // list of question get by spicific user
 export const listOfQuestions = async (req, res) => {
@@ -17,7 +17,7 @@ export const listOfQuestions = async (req, res) => {
     return errorResponseFactory(
       res,
       responseStatus.BAD_REQUEST,
-      err?.message ?? "Something went wrong, please try again"
+      err?.message ?? 'Something went wrong, please try again'
     );
   }
 };
@@ -50,7 +50,7 @@ export const createQuestion = async (req, res) => {
     return errorResponseFactory(
       res,
       400,
-      error?.message ?? "Something went wrong, please try again"
+      error?.message ?? 'Something went wrong, please try again'
     );
   }
 };

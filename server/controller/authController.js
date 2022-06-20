@@ -1,15 +1,15 @@
-import User from "../model/UserModel.js";
-import bcrypt from "bcrypt";
-import debugLib from "debug";
+import User from '../model/UserModel.js';
+import bcrypt from 'bcrypt';
+import debugLib from 'debug';
 import {
   registerValidation,
   loginValidation,
-} from "../validation/userValidation.js";
-import errorResponseFactory from "../utils/errorResponseFactory.js";
-import responseFactory from "../utils/responseFactory.js";
-import signToken from "../utils/signToken.js";
+} from '../validation/userValidation.js';
+import errorResponseFactory from '../utils/errorResponseFactory.js';
+import responseFactory from '../utils/responseFactory.js';
+import signToken from '../utils/signToken.js';
 
-const debug = debugLib("sernver:user-controller");
+const debug = debugLib('sernver:user-controller');
 
 // register a user
 export const registerUser = async (req, res) => {
@@ -23,13 +23,13 @@ export const registerUser = async (req, res) => {
   // Chesking if email is unique
   const emailExist = await User.findOne({ email: req.body.email }).exec();
   if (emailExist) {
-    return errorResponseFactory(res, 400, "Email already exists");
+    return errorResponseFactory(res, 400, 'Email already exists');
   }
 
   // Chesking if email is unique
   const userName = await User.findOne({ username: req.body.username }).exec();
   if (userName) {
-    return errorResponseFactory(res, 400, "Username already exists");
+    return errorResponseFactory(res, 400, 'Username already exists');
   }
 
   // Create a new user
@@ -38,12 +38,12 @@ export const registerUser = async (req, res) => {
   try {
     await userDetails.save();
 
-    return responseFactory(res, 201, { message: "Successfully registered" });
+    return responseFactory(res, 201, { message: 'Successfully registered' });
   } catch (err) {
     return errorResponseFactory(
       res,
       400,
-      err?.message ?? "Something went wrong, please try again"
+      err?.message ?? 'Something went wrong, please try again'
     );
   }
 };
@@ -59,13 +59,13 @@ export const loginUser = async (req, res) => {
   }
   //Checking if email exist
   const searchUser = await User.findOne({ email: req.body.email })
-    .select(["email", "password", "username"])
+    .select(['email', 'password', 'username'])
     .exec();
 
-  debug("User email", searchUser);
+  debug('User email', searchUser);
 
   if (!searchUser) {
-    return errorResponseFactory(res, 400, "Email or password is wrong");
+    return errorResponseFactory(res, 400, 'Email or password is wrong');
   }
 
   //Check if password is correct
@@ -75,7 +75,7 @@ export const loginUser = async (req, res) => {
   );
 
   if (!validPassword) {
-    return errorResponseFactory(res, 400, "Email or password is wrong");
+    return errorResponseFactory(res, 400, 'Email or password is wrong');
   }
 
   try {
@@ -88,7 +88,7 @@ export const loginUser = async (req, res) => {
     return errorResponseFactory(
       res,
       400,
-      err?.message ?? "Something went wrong, please try again"
+      err?.message ?? 'Something went wrong, please try again'
     );
   }
 };

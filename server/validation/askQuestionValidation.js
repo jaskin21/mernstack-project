@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 //register input validation
 export const askQuestionValidation = (data) => {
@@ -8,7 +8,7 @@ export const askQuestionValidation = (data) => {
     questioner: Joi.string().required(),
     answer: Joi.string().max(700),
   });
-  console.log("user question validated");
+  console.log('user question validated');
   return schema.validate(data);
 };
 
@@ -16,6 +16,6 @@ export const askQuestionListValidation = (data) => {
   const schema = Joi.object({
     respondent: Joi.string().required(),
   });
-  console.log("user question list validated");
+  console.log('user question list validated');
   return schema.validate(data);
 };

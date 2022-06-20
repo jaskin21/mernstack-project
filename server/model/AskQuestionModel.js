@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
-import UserModel from "./UserModel.js";
+import mongoose from 'mongoose';
+import UserModel from './UserModel.js';
 
 const AskQuestionSchema = mongoose.Schema({
   question: {
     type: String,
-    required: [true, "This should not be empty."],
+    required: [true, 'This should not be empty.'],
     max: 500,
   },
   answer: {
@@ -26,4 +26,4 @@ const AskQuestionSchema = mongoose.Schema({
   },
 });
 
-export default mongoose.model("AskQuestion", AskQuestionSchema);
+export default mongoose.model('AskQuestion', AskQuestionSchema);
