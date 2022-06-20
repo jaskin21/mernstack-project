@@ -1,21 +1,23 @@
-
-import React from 'react';
-import ProfileCardComponent from '../components/ProfileCardComponent';
-import QuestionCardComponent from '../components/QuestionCardComponent';
-import AnswerCardComponent from '../components/AnswerCardComponent';
+import React from "react";
+import ProfileCardComponent from "../components/ProfileCardComponent";
+import QuestionCardComponent from "../components/QuestionCardComponent";
+import AnswerCardComponent from "../components/AnswerCardComponent";
+import { QuestionProvider } from "../context/QuestionContext";
 
 const ProfilePage = () => {
   return (
     <main>
-      <section>
-        <ProfileCardComponent />
-        <div className="">
-          <QuestionCardComponent />
-          <AnswerCardComponent />
-          <AnswerCardComponent />
-          <AnswerCardComponent />
-        </div>
-      </section>
+      <QuestionProvider>
+        <section>
+          <ProfileCardComponent />
+          <div className="">
+            <QuestionCardComponent />
+            <AnswerCardComponent />
+            <AnswerCardComponent />
+            <AnswerCardComponent />
+          </div>
+        </section>
+      </QuestionProvider>
     </main>
   );
 };
