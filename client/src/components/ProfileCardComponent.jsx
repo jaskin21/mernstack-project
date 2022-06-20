@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import AppContext from "../AppContext";
+import React from 'react';
+import useUserInfo from '../hooks/useUserInfo';
 
 const ProfileCardComponent = () => {
-  const { user } = useContext(AppContext);
+
+  const userInfo = useUserInfo();
 
   return (
     <section className="text-gray-400 body-font">
@@ -18,7 +19,7 @@ const ProfileCardComponent = () => {
                 />
                 <div className="flex-grow sm:pl-8">
                   <h2 className="title-font font-medium text-lg text-white">
-                    {user.username}
+                    {userInfo?.username}
                   </h2>
                   <h3 className="text-gray-500 mb-3">UI Developer</h3>
                   <p className="mb-4">

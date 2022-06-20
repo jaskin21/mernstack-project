@@ -16,6 +16,7 @@ import AppContext from './AppContext';
 const App = () => {
   const { hasToken, hasUserInfo, requestUserInfo, token, userInfo } = useUser();
   const appContext = useContext(AppContext);
+
   useEffect(() => {
     if (hasToken() && !hasUserInfo()) {
       requestUserInfo();
@@ -23,7 +24,6 @@ const App = () => {
     if (hasToken() && !appContext.token) {
       appContext.setToken(token);
     }
-    console.log(hasUserInfo(), userInfo);
     if (hasUserInfo() && !appContext.user) {
       const { id, email, username } = userInfo;
       appContext.setUser(id, username, email);
