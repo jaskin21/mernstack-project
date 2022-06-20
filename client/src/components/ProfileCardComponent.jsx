@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from "react";
+import AppContext from "../AppContext";
 
 const ProfileCardComponent = () => {
+  const { user } = useContext(AppContext);
+
   return (
     <section className="text-gray-400 body-font">
       <div className="container py-10 mx-auto">
@@ -15,7 +18,7 @@ const ProfileCardComponent = () => {
                 />
                 <div className="flex-grow sm:pl-8">
                   <h2 className="title-font font-medium text-lg text-white">
-                    Holden Caulfield
+                    {user.username}
                   </h2>
                   <h3 className="text-gray-500 mb-3">UI Developer</h3>
                   <p className="mb-4">
