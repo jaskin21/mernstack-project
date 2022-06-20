@@ -1,57 +1,119 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SimpleAlert from './SimpleAlert';
+import axios from 'axios';
+import AppContext from '../AppContext';
+import { useNavigate } from 'react-router-dom';
+import useUser from '../hooks/useUser';
 
 const LoginForm = () => {
+  const defaultFormValue = {
+    email: '',
+    password: '',
+  };
+  const [formValue, setFormValue] = useState(defaultFormValue);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(undefined);
+  const [alertType, setAlertType] = useState('success');
+  const appContext = useContext(AppContext);
+  const navigate = useNavigate();
+  const { storeToken, requestAndStoreUserInfo } = useUser();
+
+  const setAlert = (message, type = 'success') => {
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleChange = (event) => {
+    setFormValue({
+      ...formValue,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
+        formValue
+      );
+
+      const { message, token } = response.data;
+      setAlert(message);
+      setFormValue(defaultFormValue);
+      appContext.setToken(token);
+      storeToken(token);
+      requestAndStoreUserInfo(token);
+      navigate('/', { replace: true });
+    } catch (error) {
+      console.log(error);
+      if (error.isAxiosError) {
+        const { data } = error.response;
+
+        setAlert(data.error, 'danger');
+      }
+
+      setFormValue({
+        ...formValue,
+        password: '', // empty the password when error occurs
+      });
+    }
+
+    setIsSubmitting(false);
+  };
+
   return (
-    <div className="mt-10 flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-      <div className="w-full max-w-sm inline-block align-baseline">
-        <form className="bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div className="mb-4">
-            <label
-              className="block text-white-700 text-sm font-bold mb-2"
-              htmlFor="username"
-            >
-              Username
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
-              type="text"
-              placeholder="Username"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              className="block text-white-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="******************"
-            />
-            <p className="text-red-500 text-xs italic">
-              Please choose a password.
-            </p>
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Sign In
-            </button>
+    <div className="container mx-auto p-4 bg-transparent">
+      <div className="w-full md:w-1/2 lg:w-1/3 mx-auto my-12">
+        <h1 className="text-lg font-bold">Login</h1>
+        {alertMessage && (
+          <SimpleAlert
+            title={alertMessage}
+            type={alertType}
+            dismissable={true}
+            onDismiss={() => setAlertMessage(undefined)}
+          />
+        )}
+        <form className="flex flex-col mt-4" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm text-black"
+            placeholder="Your Email address"
+            value={formValue.email}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            className="px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm text-black"
+            placeholder="Your secure password"
+            value={formValue.password}
+            onChange={handleChange}
+          />
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent bg-blue-500 text-blue-100 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex w-full justify-center items-center font-medium focus:outline-none"
+          >
+            Login
+          </button>
+        </form>
+
+        <div className="flex flex-col items-center mt-5">
+          <p className="mt-1 text-xs font-light text-gray-500">
+            Not yet a member?
             <Link
               to={'/register'}
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              className="ml-1 font-medium text-blue-400"
             >
-              Not yet a member?
+              Register now
             </Link>
-          </div>
-        </form>
+          </p>
+        </div>
       </div>
     </div>
   );
