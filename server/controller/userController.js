@@ -28,4 +28,5 @@ export const selectedUser = async (req, res) => {
       err?.message ?? "Something went wrong, please try again"
     );
   }
+
 };
