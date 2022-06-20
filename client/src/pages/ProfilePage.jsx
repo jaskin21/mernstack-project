@@ -9,7 +9,7 @@ const ProfilePage = () => {
     <main>
       <section>
         <ProfileCardComponent />
-        <div className="container flex flex-col h-full mx-auto border-gray-800 border p-4 rounded-lg">
+        <div className="">
           <QuestionCardComponent />
           <AnswerCardComponent />
           <AnswerCardComponent />
@@ -20,3 +20,5 @@ const ProfilePage = () => {
   );
 };
 export default ProfilePage;
+
+// container flex flex-col h-full mx-auto border-gray-800 border p-4 rounded-lg

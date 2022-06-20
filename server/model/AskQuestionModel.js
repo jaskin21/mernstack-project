@@ -16,6 +16,10 @@ const AskQuestionSchema = mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: UserModel,
   },
+  questioner: {
+    type: mongoose.Types.ObjectId,
+    ref: UserModel,
+  },
   date: {
     type: Date,
     default: () => Date.now(),

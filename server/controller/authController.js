@@ -25,6 +25,13 @@ export const registerUser = async (req, res) => {
   if (emailExist) {
     return errorResponseFactory(res, 400, 'Email already exists');
   }
+
+  // Chesking if email is unique
+  const userName = await User.findOne({ username: req.body.username }).exec();
+  if (userName) {
+    return errorResponseFactory(res, 400, 'Username already exists');
+  }
+
   // Create a new user
   const userDetails = new User(req.body);
 
@@ -74,11 +81,7 @@ export const loginUser = async (req, res) => {
   try {
     // Create and assign a token
     const { _id, username, email } = searchUser;
-    const token = signToken(
-      _id,
-      username,
-      email
-    );
+    const token = signToken(_id, username, email);
 
     return responseFactory(res, 200, { token });
   } catch (err) {

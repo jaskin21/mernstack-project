@@ -1,28 +1,24 @@
 import React from 'react';
+import ProfileCardQuestion from './cards/ProfileCardQuestion';
 
 const AnswerCardComponent = () => {
   return (
     <section className="text-gray-400 body-font p-2">
-      <div className="container mx-auto">
-
-        <div className="h-full flex items-center border-gray-800 border p-4 rounded-lg"> 
+      <div className="container mx-auto py-2">
+        <div className="h-full flex items-center border-gray-800 border p-4 rounded-lg">
           <div className="flex w-full justify-center items-end">
-            <div className="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
-              <label htmlFor="hero-field" className="leading-7 text-sm text-gray-400">Answer</label>
-              <h3 className="pt-3 font-semibold text-lg text-white">
-                (Question)Lorem ipsum dolor sit amet
+            <div className="relative mr-4 md:w-full text-left">
+              <h3 className="px-4 font-semibold text-2xl text-white">
+                This question is for you?
               </h3>
-              <p className="pt-2 value-text text-md text-gray-200 fkrr1">
-                (Answer)Fusce pharetra ligula mauris, quis faucibus lectus elementum vel.
-                Nullam vehicula, libero at euismod tristique, neque ligula faucibus
-                urna, quis ultricies massa enim in nunc. Vivamus ultricies, quam ut
-                rutrum blandit, turpis massa ornare velit, in sodales tellus ex nec
-                odio.
+              <ProfileCardQuestion />
+              <p className="px-4 value-text text-base text-white-400 fkrr1">
+                His/Her Answer goes here His/Her Answer goes here His/Her Answer
+                goes here His/Her Answer goes here His/Her Answer goes here
               </p>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

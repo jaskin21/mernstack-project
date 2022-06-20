@@ -1,15 +1,13 @@
 import AskQuestion from '../model/AskQuestionModel.js';
 import errorResponseFactory from '../utils/errorResponseFactory.js';
 import responseFactory, { responseStatus } from '../utils/responseFactory.js';
-import {
-  askQuestionValidation,
-} from '../validation/askQuestionValidation.js';
+import { askQuestionValidation } from '../validation/askQuestionValidation.js';
 
 // list of question get by spicific user
 export const listOfQuestions = async (req, res) => {
   try {
     const items = await AskQuestion.find({
-      respondent: req.user.id
+      respondent: req.user.id,
     }).sort({
       date: -1,
     });
@@ -41,14 +39,18 @@ export const createQuestion = async (req, res) => {
 
   const question = new AskQuestion({
     question: req.body.question,
-    // answer: req.body.answer,
     respondent: req.body.respondent,
+    questioner: req.body.questioner,
   });
   try {
     const saveQuestion = await question.save();
 
     return responseFactory(res, 200, { question: saveQuestion });
   } catch (error) {
-    return errorResponseFactory(res, 400, error?.message ?? 'Something went wrong, please try again');
+    return errorResponseFactory(
+      res,
+      400,
+      error?.message ?? 'Something went wrong, please try again'
+    );
   }
 };
