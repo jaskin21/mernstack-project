@@ -100,16 +100,15 @@ const SignupForm = () => {
           >
             Register
           </button>
-
-          <div className="flex flex-col items-center mt-5">
-            <p className="mt-1 text-xs font-light text-gray-500">
-              Register already?
-              <Link to={'/login'} className="ml-1 font-medium text-blue-400">
-                Sign in now
-              </Link>
-            </p>
-          </div>
         </form>
+        <div className="flex flex-col items-center mt-5">
+          <p className="mt-1 text-xs font-light text-gray-500">
+            Register already?
+            <Link to={'/login'} className="ml-1 font-medium text-blue-400">
+              Sign in now
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

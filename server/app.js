@@ -8,6 +8,7 @@ import cors from 'cors';
 import logger from 'morgan';
 import connectDb from './connect-db.js';
 import authRouter from './routes/authRoutes.js';
+import userRouter from './routes/userRoutes.js';
 import askQuestionRouter from './routes/askQuestionRoutes.js';
 import bearerTokenMiddleware from './middleware/bearerTokenMiddleware.js';
 
@@ -27,6 +28,7 @@ app.use(bearerTokenMiddleware);
 
 app.use('/auth', authRouter);
 app.use('/ask-question', askQuestionRouter);
+app.use('/user', userRouter);
 
 app.use(function (req, res) {
   res
