@@ -1,9 +1,8 @@
-import React from 'react';
-import useUserInfo from '../hooks/useUserInfo';
+import React, { useContext } from 'react';
+import AppContext from '../AppContext';
 
 const ProfileCardComponent = () => {
-
-  const userInfo = useUserInfo();
+  const { userInfo } = useContext(AppContext);
 
   return (
     <section className="text-gray-400 body-font">
