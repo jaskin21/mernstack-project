@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -14,21 +14,21 @@ const Banner = () => {
       </h2>
       <div className="ml-6 text-center">
         <Link
-          className="inline-flex items-center py-3 font-semibold  text-white hover:text-black transition duration-500 ease-in-out transform bg-transparent  px-7 text-md md:mt-0 hover:text-black hover:bg-white focus:shadow-outline"
-          to={'/about'}
+          className="inline-flex items-center py-3 font-semibold tracking-tighter text-white transition duration-500 ease-in-out transform bg-transparent ml-11 bg-gradient-to-r from-blue-500 to-blue-800 px-14 text-md md:mt-0 focus:shadow-outline"
+          to={"/about"}
         >
           <div className="flex text-lg">
             <span className="justify-center">Learn more</span>
           </div>
         </Link>
-        <Link
+        {/* <Link
           className="inline-flex items-center py-3 font-semibold tracking-tighter text-white transition duration-500 ease-in-out transform bg-transparent ml-11 bg-gradient-to-r from-blue-500 to-blue-800 px-14 text-md md:mt-0 focus:shadow-outline"
           to={'/register'}
         >
           <div className="flex text-lg">
             <span className="justify-center">Join now</span>
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

@@ -1,15 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import AppContext from "../AppContext";
 
 const Header = () => {
+  const { user } = useContext(AppContext);
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
 
   return (
     <header className="fixed top-0 w-full clearNav z-50">
       <div className="max-w-5xl mx-auto flex flex-wrap p-5 flex-col md:flex-row">
         <div className="flex flex-row items-center justify-between p-3 md:p-1">
           <a
-            href="/"
+            href="/home"
             className="flex text-3xl text-white font-medium mb-4 md:mb-0"
           >
             SLVL
@@ -40,32 +47,38 @@ const Header = () => {
         </div>
         <div
           className={
-            'md:flex flex-grow items-center' +
-            (navbarOpen ? ' flex' : ' hidden')
+            "md:flex flex-grow items-center" +
+            (navbarOpen ? " flex" : " hidden")
           }
         >
           <div className="md:ml-auto md:mr-10 font-4 pt-1 md:pl-14 pl-1 flex flex-wrap items-center md:text-base text-1xl md:justify-center justify-items-start">
             <Link
               className="mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04"
-              to={'/about'}
+              to={"/funfacts"}
             >
-              About
+              Facts
             </Link>
             <Link
               className="mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04"
-              to={'/login'}
+              to={"/about"}
             >
-              Login
+              About
             </Link>
+            <div
+              onClick={() => logout()}
+              className="mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04"
+            >
+              Logout
+            </div>
           </div>
           <Link
-            to={'profile'}
+            to={"/profile"}
             className=" h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left"
           >
             <img
               alt="team"
               className="flex-shrink-0 rounded-lg w-7 h-7 object-cover object-center sm:mb-0 "
-              src="https://github.com/identicons/jayaregalinada.png"
+              src={`https://github.com/identicons/${user.username}.png`}
             />
             <div className="flex-grow sm:pl-3">
               <h2 className="title-font font-medium text-lg text-white">
