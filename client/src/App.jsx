@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -10,43 +10,40 @@ import PrivatePolicy from './pages/PrivatePolicy';
 import ProfilePage from './pages/ProfilePage';
 import AboutPage from './pages/AboutPage';
 import TermsOfService from './pages/TermsOfService';
-import useUser from './hooks/useUser';
 import AppContext from './AppContext';
+import useUserToken from './hooks/useUserToken';
+import useUserInfo from './hooks/useUserInfo';
 
 const App = () => {
-  const { hasToken, hasUserInfo, requestUserInfo, token, userInfo } = useUser();
-  const appContext = useContext(AppContext);
+  const { token, setToken, removeToken } = useUserToken();
+  const { userInfo, setUserInfo, removeUserInfo } = useUserInfo();
 
-  useEffect(() => {
-    if (hasToken() && !hasUserInfo()) {
-      requestUserInfo();
-    }
-    if (hasToken() && !appContext.token) {
-      appContext.setToken(token);
-    }
-    if (hasUserInfo() && !appContext.user) {
-      const { id, email, username } = userInfo;
-      appContext.setUser(id, username, email);
-    }
-  }, []);
+  const removeSession = () => {
+    removeToken();
+    removeUserInfo();
+  };
 
   return (
-    <div>
-      <Header />
-      <div className="main-container pt-20 text-white ">
-        <Routes>
-          <Route exact path="/" element={<LandingPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/term-of-service" element={<TermsOfService />} />
-          <Route path="/private-policy" element={<PrivatePolicy />} />
-          <Route path="/register" element={<SignupForm />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+    <AppContext.Provider
+      value={{ userInfo, token, setToken, setUserInfo, removeSession }}
+    >
+      <div>
+        <Header />
+        <div className="main-container pt-20 text-white ">
+          <Routes>
+            <Route exact path="/" element={<LandingPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/term-of-service" element={<TermsOfService />} />
+            <Route path="/private-policy" element={<PrivatePolicy />} />
+            <Route path="/register" element={<SignupForm />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </AppContext.Provider>
   );
 };
 

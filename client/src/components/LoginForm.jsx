@@ -4,7 +4,7 @@ import SimpleAlert from './SimpleAlert';
 import axios from 'axios';
 import AppContext from '../AppContext';
 import { useNavigate } from 'react-router-dom';
-import useUser from '../hooks/useUser';
+import useUserInfo from '../hooks/useUserInfo';
 
 const LoginForm = () => {
   const defaultFormValue = {
@@ -17,7 +17,8 @@ const LoginForm = () => {
   const [alertType, setAlertType] = useState('success');
   const appContext = useContext(AppContext);
   const navigate = useNavigate();
-  const { storeToken, requestAndStoreUserInfo } = useUser();
+  const { requestUserInfo } = useUserInfo();
+  // const { storeToken, requestAndStoreUserInfo } = useUser();
 
   const setAlert = (message, type = 'success') => {
     setAlertMessage(message);
@@ -45,11 +46,11 @@ const LoginForm = () => {
       setAlert(message);
       setFormValue(defaultFormValue);
       appContext.setToken(token);
-      storeToken(token);
-      requestAndStoreUserInfo(token);
+      const {id, email, username} = await requestUserInfo(token);
+
+      appContext.setUserInfo(id, email, username);
       navigate('/', { replace: true });
     } catch (error) {
-      console.log(error);
       if (error.isAxiosError) {
         const { data } = error.response;
 

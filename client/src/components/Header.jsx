@@ -1,8 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AppContext from '../AppContext';
 
 const Header = () => {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const headerItemClassName =
+    'mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04';
+
+  const { userInfo, removeSession } = useContext(AppContext);
+
+  const confirmLogout = () => {
+    const logoutConfirmation = window.confirm(
+      'Are you sure you want to logout?'
+    );
+
+    if (logoutConfirmation) {
+      removeSession();
+      navigate('/', { replace: true });
+    }
+  };
+
+  const imageUrl = `https://github.com/identicons/${
+    userInfo?.username ?? 'slvl'
+  }.png`;
 
   return (
     <header className="fixed top-0 w-full clearNav z-50">
@@ -45,34 +68,40 @@ const Header = () => {
           }
         >
           <div className="md:ml-auto md:mr-10 font-4 pt-1 md:pl-14 pl-1 flex flex-wrap items-center md:text-base text-1xl md:justify-center justify-items-start">
-            <Link
-              className="mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04"
-              to={'/about'}
-            >
+            <Link className={headerItemClassName} to={'/about'}>
               About
             </Link>
-            <Link
-              className="mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04"
-              to={'/login'}
-            >
-              Login
-            </Link>
+            {userInfo ? (
+              <button
+                type="button"
+                onClick={confirmLogout}
+                className={headerItemClassName}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link className={headerItemClassName} to={'/login'}>
+                Login
+              </Link>
+            )}
           </div>
-          <Link
-            to={'profile'}
-            className=" h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left"
-          >
-            <img
-              alt="team"
-              className="flex-shrink-0 rounded-lg w-7 h-7 object-cover object-center sm:mb-0 "
-              src="https://github.com/identicons/jayaregalinada.png"
-            />
-            <div className="flex-grow sm:pl-3">
-              <h2 className="title-font font-medium text-lg text-white">
-                UserName
-              </h2>
-            </div>
-          </Link>
+          {userInfo && (
+            <Link
+              to={'profile'}
+              className=" h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left"
+            >
+              <img
+                alt="team"
+                className="flex-shrink-0 rounded-lg w-7 h-7 object-cover object-center sm:mb-0 "
+                src={imageUrl}
+              />
+              <div className="flex-grow sm:pl-3">
+                <h2 className="title-font font-medium text-lg text-white">
+                  {userInfo?.username}
+                </h2>
+              </div>
+            </Link>
+          )}
         </div>
       </div>
     </header>
