@@ -49,7 +49,6 @@ const LoginForm = () => {
       requestAndStoreUserInfo(token);
       navigate('/', { replace: true });
     } catch (error) {
-      console.log(error);
       if (error.isAxiosError) {
         const { data } = error.response;
 

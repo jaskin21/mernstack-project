@@ -24,7 +24,6 @@ const SignupForm = () => {
     setIsSubmitting(true);
 
     try {
-      // console.log('uploading file');
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/register`,
         formValue

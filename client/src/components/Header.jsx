@@ -1,8 +1,40 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import useUser from '../hooks/useUser';
+import useUserInfo from '../hooks/useUserInfo';
 
 const Header = () => {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
+  const userInfo = useUserInfo();
+
+  const [hasLogout, setHasLogout] = useState(() => {
+    return userInfo ?? false;
+  });
+
+  const { removeSession } = useUser();
+
+  const navigate = useNavigate();
+
+  const headerItemClassName =
+    'mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04';
+
+  const confirmLogout = () => {
+    const logoutConfirmation = window.confirm(
+      'Are you sure you want to logout?'
+    );
+
+    if (logoutConfirmation) {
+      removeSession();
+      setHasLogout(true);
+      navigate('/', { replace: true });
+    }
+  };
+
+  useEffect(() => {
+    console.log({ userInfo });
+  });
+  
 
   return (
     <header className="fixed top-0 w-full clearNav z-50">
@@ -45,18 +77,22 @@ const Header = () => {
           }
         >
           <div className="md:ml-auto md:mr-10 font-4 pt-1 md:pl-14 pl-1 flex flex-wrap items-center md:text-base text-1xl md:justify-center justify-items-start">
-            <Link
-              className="mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04"
-              to={'/about'}
-            >
+            <Link className={headerItemClassName} to={'/about'}>
               About
             </Link>
-            <Link
-              className="mr-2 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04"
-              to={'/login'}
-            >
-              Login
-            </Link>
+            {hasLogout ? (
+              <button
+                type="button"
+                onClick={confirmLogout}
+                className={headerItemClassName}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link className={headerItemClassName} to={'/login'}>
+                Login
+              </Link>
+            )}
           </div>
           <Link
             to={'profile'}

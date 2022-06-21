@@ -17,13 +17,26 @@ const useUser = () => {
     }
   };
 
-  const [userInfo, setUserInfo] = useState(() => {
+  const removeToken = () => {
+    window.localStorage.removeItem(TOKEN_KEY);
+  };
+
+  const removeUserInfo = () => {
+    window.localStorage.removeItem(USER_INFO_KEY);
+  };
+
+  const removeSession = () => {
+    removeToken();
+    removeUserInfo();
+  };
+
+  const [userInfo, setUserInfo] = useState((state) => {
     try {
       const user = window.localStorage.getItem(USER_INFO_KEY);
 
-      return user ? JSON.parse(user) : undefined;
+      return user ? JSON.parse(user) : state;
     } catch (error) {
-      return undefined;
+      return state;
     }
   });
 
@@ -79,6 +92,7 @@ const useUser = () => {
     hasUserInfo,
     requestAndStoreUserInfo,
     requestUserInfo,
+    removeSession,
   };
 };
 

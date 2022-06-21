@@ -14,12 +14,14 @@ import useUser from './hooks/useUser';
 import AppContext from './AppContext';
 
 const App = () => {
-  const { hasToken, hasUserInfo, requestUserInfo, token, userInfo } = useUser();
+  const { hasToken, hasUserInfo, requestAndStoreUserInfo, token, userInfo } =
+    useUser();
+
   const appContext = useContext(AppContext);
 
   useEffect(() => {
     if (hasToken() && !hasUserInfo()) {
-      requestUserInfo();
+      requestAndStoreUserInfo(token);
     }
     if (hasToken() && !appContext.token) {
       appContext.setToken(token);
